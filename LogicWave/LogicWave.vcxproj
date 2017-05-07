@@ -92,6 +92,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -139,8 +140,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\lib\UI\Animation.cpp" />
+    <ClCompile Include="src\lib\UI\FBO.cpp" />
+    <ClCompile Include="src\lib\UI\fps.cpp" />
+    <ClCompile Include="src\lib\UI\Frame.cpp" />
+    <ClCompile Include="src\lib\UI\get_event.cpp" />
+    <ClCompile Include="src\lib\UI\GraphPara.cpp" />
+    <ClCompile Include="src\lib\UI\mouse.cpp" />
+    <ClCompile Include="src\lib\UI\UI.cpp" />
+    <ClCompile Include="src\lib\UI\UILib.cpp" />
+    <ClCompile Include="src\lib\UI\win_info.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\lib\UI\Animation.h" />
+    <ClInclude Include="src\lib\UI\define.h" />
+    <ClInclude Include="src\lib\UI\FBO.h" />
+    <ClInclude Include="src\lib\UI\fps.h" />
+    <ClInclude Include="src\lib\UI\Frame.h" />
+    <ClInclude Include="src\lib\UI\get_event.h" />
+    <ClInclude Include="src\lib\UI\GraphPara.h" />
+    <ClInclude Include="src\lib\UI\mouse.h" />
+    <ClInclude Include="src\lib\UI\UI.h" />
+    <ClInclude Include="src\lib\UI\UILib.h" />
+    <ClInclude Include="src\lib\UI\win_info.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets" Condition="Exists('..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" />
+    <Import Project="..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets" Condition="Exists('..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets'))" />
+  </Target>
 </Project>
