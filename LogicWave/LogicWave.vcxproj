@@ -156,6 +156,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\lib\SM\ShareMemory.h" />
     <ClInclude Include="src\lib\UI\Animation.h" />
     <ClInclude Include="src\lib\UI\define.h" />
     <ClInclude Include="src\lib\UI\FBO.h" />
@@ -167,6 +168,8 @@
     <ClInclude Include="src\lib\UI\UI.h" />
     <ClInclude Include="src\lib\UI\UILib.h" />
     <ClInclude Include="src\lib\UI\win_info.h" />
+    <ClInclude Include="src\lib\VST\define.h" />
+    <ClInclude Include="src\lib\VST\VST.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
