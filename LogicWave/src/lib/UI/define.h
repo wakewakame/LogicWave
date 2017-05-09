@@ -26,17 +26,6 @@ public:
 		j = int(Proportion(double(i), double(i_mix), double(i_max), double(j_min), double(j_max)));
 		return j;
 	}
-	//LPSTR->LPCTSTR(=LPCWSTR)
-	static void LPtoLPCW(LPSTR str, wchar_t wlocal[300]) {
-		MultiByteToWideChar(
-			CP_ACP,
-			MB_PRECOMPOSED,
-			str,
-			strlen(str),
-			wlocal,
-			strlen(str) + 1
-		);
-	}
 };
 
 //ÉOÉâÉtè„ÇÃç¿ïW

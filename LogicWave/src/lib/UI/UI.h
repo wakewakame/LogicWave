@@ -36,26 +36,41 @@ public:
 
 //フェードグラフ描画クラス
 class Fade : public Frame {
+public:
+	Fade(Frame *set_parent = nullptr) : Frame(set_parent) {
 
+	}
 };
 
 
 //ボタン描画クラス
 class Button : public Frame {
+public:
+	Button(Frame *set_parent = nullptr) : Frame(set_parent) {
 
+	}
 };
 
 //ボリューム描画クラス
 class Volume : public Frame {
+public:
+	Volume(Frame *set_parent = nullptr) : Frame(set_parent) {
 
+	}
 };
 
 //個数選択描画クラス
 class Figure : public Frame {
+public:
+	Figure(Frame *set_parent = nullptr) : Frame(set_parent) {
 
+	}
 };
 
 //波形の形選択描画クラス
 class WaveForm : public Frame {
+public:
+	WaveForm(Frame *set_parent = nullptr) : Frame(set_parent) {
 
+	}
 };

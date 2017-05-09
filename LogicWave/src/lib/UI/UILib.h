@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-//コンソール非表示化
-#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
-
 #include "define.h"
 #include "win_info.h"
 #include "FBO.h"
