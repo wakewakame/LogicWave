@@ -36,11 +36,13 @@ struct ToneData {
 };
 
 //フレーム情報
-struct FrameData {
+class FrameData {
+public:
 	//UI管理クラスインスタンス化
 	UILib ui;
 
 	//変数初期化
+	Frame *window; //サブrootフレーム
 	Frame *root; //パラメータ関係のフレームツリーのrootフレーム
 	Frame *tone; //音色設定フレーム
 	Frame *fade; //フェード設定フレーム
@@ -79,9 +81,10 @@ struct FrameData {
 	Volume *scroll;
 
 	//生成時自動配置
-	FrameData() {
+	void placement() {
 		//親子関係の定義
-		root = ui.window.add<Frame>();
+		window = ui.window.add<Frame>();
+		root = window->add<Frame>();
 		tone = root->add<Frame>();
 		make_auto = tone->add<Button>();
 		raw_wave_para = tone->add<Frame>();
@@ -110,7 +113,22 @@ struct FrameData {
 		fadechange = fade->add<Frame>();
 		fadechange_vol = fadechange->add<Fade>();
 		fadechange_pitch = fadechange->add<Fade>();
-		scroll = ui.window.add<Volume>();
+		scroll = window->add<Volume>();
+		//配置
+		window->mode = 1;
+		root->scroll = 1;
+		hostpar->mode = 1;
+		fadein->mode = 1;
+		fadeout->mode = 1;
+		fadechange->mode = 1;
+		scroll->length.x = 20.0;
+		scroll->lock = 1;
+		//整列
+		ui.window.orderliness();
+	}
+
+	FrameData() {
+		
 	}
 };
 

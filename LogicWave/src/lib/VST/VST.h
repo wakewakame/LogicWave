@@ -8,8 +8,6 @@ public:
 	//変数宣言
 	//通信クラス
 	ShareMem<ShareMemData> sm;
-	//UIクラス
-	UILib ui;
 	//フレーム管理クラス
 	FrameData frames;
 
