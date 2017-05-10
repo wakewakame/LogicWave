@@ -36,7 +36,7 @@ public:
 	double gap; //子フレーム間同士の隙間(px単位)
 	WindowPoint length; //全フレームが初期値サイズ時の自フレームのサイズ
 	bool lock; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-	bool scroll; //スクロール可能フレームかどうか
+	double scroll; //スクロール不可能なら0.0未満
 	WindowPoint lock_length; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	WINDOW_INFO *win;
 

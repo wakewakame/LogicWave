@@ -116,7 +116,7 @@ public:
 		scroll = window->add<Volume>();
 		//”z’u
 		window->mode = 1;
-		root->scroll = 1;
+		root->scroll = 0.0;
 		hostpar->mode = 1;
 		fadein->mode = 1;
 		fadeout->mode = 1;

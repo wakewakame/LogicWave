@@ -14,7 +14,7 @@ void Frame::reset() {
 	gap = 3.0; //子フレーム間同士の隙間(px単位)
 	length = { 100.0, 100.0 }; //全フレームが初期値サイズ時の自フレームのサイズ
 	lock = 0; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-	scroll = 0; //スクロール可能フレームかどうか
+	scroll = -1.0; //スクロール不可能なら0.0未満
 	lock_length = { 0.0, 0.0 }; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	return;
 }
@@ -86,13 +86,13 @@ void Frame::resize(WindowRect set_pos){
 			for (int i = 0; i < childs.size(); i++) {
 				//i個目の子フレーム位置算出
 				//上下位置
-				if (!childs[i]->scroll) {
+				if (childs[i]->scroll < 0.0) {
 					childs[i]->pos.top = pos.top + gap;
 					childs[i]->pos.bottom = pos.bottom - gap;
 				}
 				else {
+					childs[i]->pos.top = pos.top + gap - childs[i]->scroll*(childs[i]->length.y - (size.y - gap*2.0));
 					childs[i]->pos.bottom = childs[i]->pos.top + childs[i]->length.y;
-					std::cout << childs[i]->length.y << std::endl;
 				}
 				//左位置
 				if (i == 0) {
@@ -130,11 +130,12 @@ void Frame::resize(WindowRect set_pos){
 			for (int i = 0; i < childs.size(); i++) {
 				//i個目の子フレーム位置算出
 				//左右位置
-				if (!childs[i]->scroll) {
+				if (childs[i]->scroll < 0.0) {
 					childs[i]->pos.left = pos.left + gap;
 					childs[i]->pos.right = pos.right - gap;
 				}
 				else {
+					childs[i]->pos.left = pos.left + gap - childs[i]->scroll*(childs[i]->length.x - (size.x - gap*2.0));
 					childs[i]->pos.right = childs[i]->pos.left + childs[i]->length.x;
 				}
 				//上位置
@@ -180,6 +181,13 @@ void Frame::orderliness() {
 }
 
 void Frame::draw() {
+	if (scroll >= 0.0) {
+		scroll -= 0.01*(double)(win->mouse.wheel);
+		if (scroll < 0.0) scroll = 0.0;
+		if (scroll > 1.0) scroll = 1.0;
+		parent->resize(parent->pos);
+		std::cout << scroll << std::endl;
+	}
 	main_draw();
 	childs_draw();
 	return;

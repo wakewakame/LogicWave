@@ -28,6 +28,7 @@ public:
 		if (set_MapName == nullptr) { //引数がなければエラー
 			return 1;
 		}
+		std::cout << "MapName is exist" << std::endl;
 		//文字列型変換処理
 		wchar_t wlocal[300];
 		LPCTSTR MapName;
@@ -38,11 +39,13 @@ public:
 		if (MapHandle == NULL) { //マップが存在していなければエラー
 			return 1;
 		}
+		std::cout << "Map is exist" << std::endl;
 		//共有メモリのポインタ取得
 		smd = (ShareMemData *)MapViewOfFile(MapHandle, FILE_MAP_ALL_ACCESS, 0, 0, ShareMemSize); //マップ内容同期
 		if (smd == NULL) { //マップ内容取得ができていなければエラー
 			return 1;
 		}
+		std::cout << "To access Map is success" << std::endl;
 		return 0;
 	}
 	//LPSTR->LPCTSTR(=LPCWSTR)関数
