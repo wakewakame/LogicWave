@@ -84,7 +84,7 @@ public:
 	void placement() {
 		//親子関係の定義
 		window = ui.window.add<Frame>();
-		root = window->add<Frame>();
+		root = window->add<Scroll>();
 		tone = root->add<Frame>();
 		make_auto = tone->add<Button>();
 		raw_wave_para = tone->add<Frame>();
@@ -116,7 +116,6 @@ public:
 		scroll = window->add<Volume>();
 		//配置
 		window->mode = 1;
-		root->scroll = 0.0;
 		hostpar->mode = 1;
 		fadein->mode = 1;
 		fadeout->mode = 1;

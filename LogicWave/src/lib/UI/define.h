@@ -110,6 +110,11 @@ struct WindowRect {
 	}
 };
 
+//0-255で色指定する関数
+static void glColor(double R, double G, double B, double A = 255.0) {
+	glColor4d(R / 255.0, G / 255.0, B / 255.0, A / 255.0);
+}
+
 //グラフのプロパティ
 class graph {
 public:

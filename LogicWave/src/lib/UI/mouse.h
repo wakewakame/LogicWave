@@ -18,7 +18,6 @@ public:
 	Click b_push; //前フレームのpush
 	Click click; //押されたフレームのみ1
 	double wheel; //ホイールの操作量
-	bool wheel_flag; //ホイールイベントが発生したとき用フラグ
 
 //関数宣言
 	//GLウィンドウハンドル設定関数
@@ -35,6 +34,8 @@ public:
 	MOUSE();
 
 private:
+//変数宣言
+	bool wheel_flag; //ホイールイベントが発生したとき用フラグ
 //関数宣言
 	//マウスイベント取得関数
 	void get_event();
