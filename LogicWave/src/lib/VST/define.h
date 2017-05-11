@@ -43,7 +43,7 @@ public:
 
 	//変数初期化
 	Frame *window; //サブrootフレーム
-	Frame *root; //パラメータ関係のフレームツリーのrootフレーム
+	Scroll *root; //パラメータ関係のフレームツリーのrootフレーム
 	Frame *tone; //音色設定フレーム
 	Frame *fade; //フェード設定フレーム
 	//音色系
@@ -113,15 +113,12 @@ public:
 		fadechange = fade->add<Frame>();
 		fadechange_vol = fadechange->add<Fade>();
 		fadechange_pitch = fadechange->add<Fade>();
-		scroll = window->add<Volume>();
 		//配置
 		window->mode = 1;
 		hostpar->mode = 1;
 		fadein->mode = 1;
 		fadeout->mode = 1;
 		fadechange->mode = 1;
-		scroll->length.x = 20.0;
-		scroll->lock = 1;
 		//整列
 		ui.window.orderliness();
 	}

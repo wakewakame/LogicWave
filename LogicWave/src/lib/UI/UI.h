@@ -11,6 +11,7 @@ class Scroll : public Frame {
 private:
 	void event() {
 		if (win->mouse.wheel != 0.0 || parent->mode?size.y:size.x != parent->mode?length.y:length.x) {
+			//スクロールに合わせてフレーム座標算出
 			scroll -= 0.02*(double)(win->mouse.wheel);
 			if (scroll < 0.0) scroll = 0.0;
 			if (scroll > 1.0) scroll = 1.0;
@@ -24,15 +25,32 @@ private:
 			resize(pos);
 		}
 	}
+	void main_draw() {
+		glColor4d(1.0, 1.0, 1.0, 0.5);
+		glDisable(GL_POLYGON_SMOOTH);
+		glBegin(GL_QUADS);
+		glVertex2d(bar->pos.left, bar->pos.top);
+		glVertex2d(bar->pos.left, bar->pos.bottom);
+		glVertex2d(bar->pos.right, bar->pos.bottom);
+		glVertex2d(bar->pos.right, bar->pos.top);
+		glEnd();
+	}
 
 public:
 	//変数宣言
+	//スクロールパーセンテージ
 	double scroll;
+	//スクロールバー
+	Frame *bar;
+
 
 	//コンストラクタ
 	//スクロールフレームは親フレーム必須のため、デフォルト引数なし
 	Scroll(Frame *set_parent) : Frame(set_parent) {
 		scroll = 0.0;
+		bar = parent->add<Frame>();
+		bar->length = {20.0,20.0};
+		bar->lock = 1;
 	}
 };
 
