@@ -30,15 +30,15 @@ public:
 		}
 		std::cout << "MapName is exist" << std::endl;
 		//文字列型変換処理
-		wchar_t wlocal[300];
-		LPCTSTR MapName;
-		LPtoLPCW(set_MapName, wlocal);
-		MapName = wlocal;
+		wchar_t *MapName = new wchar_t[strlen(set_MapName)];
+		LPtoLPCW(set_MapName, MapName);
 		//共有メモリの検索
-		MapHandle = OpenFileMapping(FILE_MAP_ALL_ACCESS, FALSE, MapName); //ファイル名からマップハンドル取得
+		MapHandle = OpenFileMapping(FILE_MAP_ALL_ACCESS, FALSE, (LPCTSTR)MapName); //ファイル名からマップハンドル取得
 		if (MapHandle == NULL) { //マップが存在していなければエラー
 			return 1;
 		}
+		//newした変数を解放
+		delete MapName;
 		std::cout << "Map is exist" << std::endl;
 		//共有メモリのポインタ取得
 		smd = (ShareMemData *)MapViewOfFile(MapHandle, FILE_MAP_ALL_ACCESS, 0, 0, ShareMemSize); //マップ内容同期
@@ -49,7 +49,7 @@ public:
 		return 0;
 	}
 	//LPSTR->LPCTSTR(=LPCWSTR)関数
-	void LPtoLPCW(LPSTR str, wchar_t wlocal[300]) {
+	void LPtoLPCW(LPSTR str, wchar_t *wlocal) {
 		MultiByteToWideChar(
 			CP_ACP,
 			MB_PRECOMPOSED,

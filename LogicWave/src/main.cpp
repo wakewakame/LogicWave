@@ -13,13 +13,11 @@ int main(int argc, LPSTR argv[]) {
 	AllProcess ap;
 
 	//‘S‚Ä‚Ìˆ—‚ğÀs
-	ap.start("VSTGUIMEM0");
-	/*
-	if (argc != 2) {
+	//ap.start("VSTGUIMEM0");
+	if (argc == 2) {
 		return ap.start(argv[1]);
 	}
 	else {
 		return 1;
 	}
-	*/
 }

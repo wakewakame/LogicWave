@@ -3,7 +3,7 @@
 bool AllProcess::start(LPSTR MapName) {
 	//ホストプロセスに接続
 	if (sm.Open(MapName)) {
-	//	return 1;
+		return 1;
 	}
 	//UIクラス初期化
 	frames.ui.init();
