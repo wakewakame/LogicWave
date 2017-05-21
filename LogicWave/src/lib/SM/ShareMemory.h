@@ -30,7 +30,7 @@ public:
 		}
 		std::cout << "MapName is exist" << std::endl;
 		//文字列型変換処理
-		wchar_t *MapName = new wchar_t[strlen(set_MapName)];
+		wchar_t *MapName = new wchar_t[strlen(set_MapName) + 1];
 		LPtoLPCW(set_MapName, MapName);
 		//共有メモリの検索
 		MapHandle = OpenFileMapping(FILE_MAP_ALL_ACCESS, FALSE, (LPCTSTR)MapName); //ファイル名からマップハンドル取得

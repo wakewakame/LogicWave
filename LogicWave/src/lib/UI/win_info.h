@@ -14,6 +14,9 @@ private:
 //関数宣言
 	//ウィンドウリサイズイベント処理関数
 	static void resize_event(GLFWwindow *window, int width, int heigh);
+
+	//ウィンドウクローズイベント処理関数
+	static void close_event(GLFWwindow *window);
 	
 	//ウィンドウリサイズフラグ処理
 	void resize_flag_event();
@@ -35,7 +38,7 @@ public:
 	//WINDOW_INFOのインスタンス取得関数
 	static WINDOW_INFO *get_instance(GLFWwindow *const window);
 
-	//GLウィンドウハンドル設定関数
+	//GLウィンドウハンドル設定関数(必ずglfwMakeContextCurrent実行後に実行)
 	void set_GLhwnd(GLFWwindow *set_gl_hwnd);
 
 	//ウィンドウサイズ変更関数

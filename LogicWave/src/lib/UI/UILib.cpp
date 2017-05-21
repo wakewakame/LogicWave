@@ -33,22 +33,23 @@ void UILib::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
 	//ウィンドウ生成
-	win.set_GLhwnd(
-		glfwCreateWindow
-			(
-				win.size.x,
-				win.size.y,
-				win.title.c_str(),
-				NULL,
-				NULL
-			)
+	GLFWwindow *glwin = glfwCreateWindow
+	(
+		win.size.x,
+		win.size.y,
+		win.title.c_str(),
+		NULL,
+		NULL
 	);
 	
 	//ウィンドウが生成されていなければ終了
-	if (error(win.hwnd == NULL)) return;
+	if (error(glwin== NULL)) return;
 	
 	//生成したウィンドウをOpenGLの処理対象にする
-	glfwMakeContextCurrent(win.gl_hwnd);
+	glfwMakeContextCurrent(glwin);
+
+	//win_infoにGLFWウィンドウハンドル代入
+	win.set_GLhwnd(glwin);
 
 	//GLEW初期化
 	glewExperimental = GL_TRUE;

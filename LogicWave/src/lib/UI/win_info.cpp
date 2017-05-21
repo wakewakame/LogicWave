@@ -17,6 +17,12 @@ void WINDOW_INFO::resize_event(GLFWwindow *window, int width, int heigh) {
 	WINDOW_INFO::get_instance(window)->size.y = (double)heigh;
 }
 
+void WINDOW_INFO::close_event(GLFWwindow *window) {
+	WINDOW_INFO::get_instance(window)->gl_hwnd = NULL;
+	WINDOW_INFO::get_instance(window)->hwnd = NULL;
+	glfwSetWindowShouldClose(window, GL_FALSE);
+}
+
 void WINDOW_INFO::resize_flag_event() {
 	if (size != b_size) {
 		resize_flag = 1;
@@ -36,8 +42,10 @@ WINDOW_INFO *WINDOW_INFO::get_instance(GLFWwindow *const window) {
 void WINDOW_INFO::set_GLhwnd(GLFWwindow *set_gl_hwnd) {
 	//GLFWウィンドウハンドル代入
 	gl_hwnd = set_gl_hwnd;
+
 	//GLFWのデバイスコンテキストハンドル取得
 	HDC glDc = wglGetCurrentDC();
+
 	//ウィンドウハンドル代入
 	hwnd = WindowFromDC(glDc);
 
@@ -46,6 +54,9 @@ void WINDOW_INFO::set_GLhwnd(GLFWwindow *set_gl_hwnd) {
 
 	//ウィンドウリサイズイベントのコールバック関数登録
 	glfwSetWindowSizeCallback(gl_hwnd, resize_event);
+
+	//ウィンドウクローズイベントのコールバック関数登録
+	glfwSetWindowCloseCallback(gl_hwnd, close_event);
 
 	//代入
 	mouse.SetGLhwnd(gl_hwnd);

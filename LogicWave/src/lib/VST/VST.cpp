@@ -1,26 +1,38 @@
+#define NUM_TRY 10 //共有メモリにアクセスを試みる回数
+#define GAP_TRY 500 //共有メモリにアクセスを試みる区間(ms)
+
 #include "VST.h"
 
 bool AllProcess::start(LPSTR MapName) {
+	bool req = 0;
 	//ホストプロセスに接続
-	if (sm.Open(MapName)) {
-		return 1;
+	for (int i = 0; i <= NUM_TRY; i++) {
+		if (i == NUM_TRY) return 1;
+		if (!sm.Open(MapName)) break;
+		Sleep(GAP_TRY);
 	}
 	//UIクラス初期化
 	frames.ui.init();
-	//ウィンドウハンドル代入
-	sm.smd->Ready = frames.ui.win.hwnd;
+	//多重起動防止
+	if (IsWindow(sm.smd->Ready) != 0) {
+		return 1;
+	}
+	else {
+		sm.smd->Ready = frames.ui.win.hwnd;
+	}
 	//フレームレート設定
 	frames.ui.win.fps.SetFPS(30);
 	//フレーム配置
 	frames.placement();
 	//メインルーチン
 	while (true) {
-		//UIループ処理
-		if (frames.ui.loop()) break;
-		//ホスト生存確認
-		if (sm.smd->Host == nullptr) break;
+		//UIループ処理とホスト生存確認
+		if (frames.ui.loop() || sm.smd->exit) {
+			req = 1;
+			break;
+		}
 	}
 	//終了時処理
 	frames.ui.exit();
-	return 0;
+	return req;
 }
