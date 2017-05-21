@@ -29,7 +29,7 @@ public:
 	//初期化関数
 	void init();
 	//ループ関数
-	void loop();
+	bool loop();
 	//描画関数
 	void render();
 	//リサイズ処理関数(リサイズイベント以外で呼ぶときはinit=1)

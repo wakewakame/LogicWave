@@ -82,36 +82,36 @@ void UILib::init() {
 	return;
 }
 
-void UILib::loop() {
+bool UILib::loop() {
 	//エラー確認
-	if (f_exit) return;
+	if (f_exit) return 1;
 
 	//ウィンドウが開いている間繰り返す
-	while (glfwWindowShouldClose(win.gl_hwnd) == GL_FALSE)
-	{
-		//イベントが発生するまで待機
-		glfwPollEvents();
+	if (glfwWindowShouldClose(win.gl_hwnd) != GL_FALSE) return 1;
 
-		//イベント処理等
-		win.loop();
+	//イベントが発生するまで待機
+	glfwPollEvents();
 
-		//画面初期化
-		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+	//イベント処理等
+	win.loop();
 
-		//描画
-		render();
+	//画面初期化
+	glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 
-		//リサイズ処理
-		window_resize();
+	//描画
+	render();
 
-		//バッファに描画
-		glFlush();
+	//リサイズ処理
+	window_resize();
 
-		//カラーバッファを入れ替える
-		glfwSwapBuffers(win.gl_hwnd);
-	}
+	//バッファに描画
+	glFlush();
 
+	//カラーバッファを入れ替える
+	glfwSwapBuffers(win.gl_hwnd);
+
+	return 0;
 }
 
 void UILib::render() {

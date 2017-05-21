@@ -34,9 +34,12 @@ WINDOW_INFO *WINDOW_INFO::get_instance(GLFWwindow *const window) {
 }
 
 void WINDOW_INFO::set_GLhwnd(GLFWwindow *set_gl_hwnd) {
-	//代入
+	//GLFWウィンドウハンドル代入
 	gl_hwnd = set_gl_hwnd;
-	hwnd = (HWND)gl_hwnd;
+	//GLFWのデバイスコンテキストハンドル取得
+	HDC glDc = wglGetCurrentDC();
+	//ウィンドウハンドル代入
+	hwnd = WindowFromDC(glDc);
 
 	//コールバック関数用自クラスのポインタ指定
 	glfwSetWindowUserPointer(gl_hwnd, this);
