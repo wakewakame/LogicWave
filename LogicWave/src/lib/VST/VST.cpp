@@ -19,6 +19,7 @@ bool AllProcess::start(LPSTR MapName) {
 	}
 	else {
 		sm.smd->Ready = frames.ui.win.hwnd;
+		frames.ui.win.hide = 1;
 	}
 	//フレームレート設定
 	frames.ui.win.fps.SetFPS(30);
@@ -28,7 +29,6 @@ bool AllProcess::start(LPSTR MapName) {
 	while (true) {
 		//UIループ処理とホスト生存確認
 		if (frames.ui.loop() || sm.smd->exit) {
-			req = 1;
 			break;
 		}
 	}

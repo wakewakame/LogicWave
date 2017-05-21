@@ -32,6 +32,7 @@ public:
 	GLFWwindow *gl_hwnd; //OpenGLの生成GLウィンドウのハンドル
 	MOUSE mouse; //マウスイベント保持クラス
 	FPS fps; //フレームレート管理クラス
+	bool hide; //クローズボタンが押されたときに終了しない
 	std::string title; //ウィンドウタイトル
 
 //関数宣言

@@ -8,6 +8,7 @@ WINDOW_INFO::WINDOW_INFO() {
 	hwnd = nullptr; //OpenGLの生成ウィンドウのハンドル
 	gl_hwnd = nullptr;
 	fps.SetFPS(30.0); //フレームレート設定
+	hide = 0;
 	title = "UILib"; //ウィンドウタイトル設定
 }
 
@@ -18,9 +19,9 @@ void WINDOW_INFO::resize_event(GLFWwindow *window, int width, int heigh) {
 }
 
 void WINDOW_INFO::close_event(GLFWwindow *window) {
-	WINDOW_INFO::get_instance(window)->gl_hwnd = NULL;
-	WINDOW_INFO::get_instance(window)->hwnd = NULL;
-	glfwSetWindowShouldClose(window, GL_FALSE);
+	if (WINDOW_INFO::get_instance(window)->hide) {
+		glfwSetWindowShouldClose(window, GL_FALSE);
+	}
 }
 
 void WINDOW_INFO::resize_flag_event() {
