@@ -5,6 +5,7 @@
 #include <string.h>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <memory>
 
 //シェーダ管理クラス
@@ -15,11 +16,11 @@ private:
 	//デフォルトフラグメントシェーダのID
 	GLuint NormalFragmentShaderID;
 	//リソースファイルの読み込み
-	void *GetResource(std::string Path);
+	std::string GetResource(std::string FileName);
 	//バーテックスシェーダ読み込み
-	GLuint LoadVertexShader(std::string VertexFilePath);
+	GLuint LoadVertexShader(std::string VertexFileName);
 	//フラグメントシェーダ読み込み
-	GLuint LoadFragmentShader(std::string FragmentFilePath);
+	GLuint LoadFragmentShader(std::string FragmentFileName);
 	//LPSTR->LPCTSTR(=LPCWSTR)関数
 	void LPtoLPCW(LPCSTR str, wchar_t *wlocal) {
 		MultiByteToWideChar(
@@ -42,7 +43,7 @@ public:
 	~ShaderManagement();
 
 	//シェーダ読み込み(どちらか一方をデフォルトのシェーダにしたい場合は引数に""指定)
-	GLuint Load(std::string VertexFilePath, std::string FragmentFilePath);
+	GLuint Load(std::string VertexFileName, std::string FragmentFileName);
 
 	//シェーダ変更
 	void Change(GLuint ID);

@@ -1,33 +1,36 @@
 #include "ShaderManagement.h"
 
-void *ShaderManagement::GetResource(std::string FileName) {
+std::string ShaderManagement::GetResource(std::string FileName) {
 	std::unique_ptr<wchar_t[]> FileName_{ new wchar_t[FileName.size() + 1] };
 
 	LPtoLPCW(FileName.c_str(), FileName_.get());
-	LoadResource(
+	HRSRC resInfo = FindResource(
 		GetModuleHandle(NULL),
-		FindResource(
+		FileName_.get(),
+		RT_RCDATA
+	);
+	if (resInfo == NULL) return "";
+	return std::string(
+		(char*)LockResource(
+			LoadResource(
+				GetModuleHandle(NULL),
+				resInfo
+			)
+		),
+		SizeofResource(
 			GetModuleHandle(NULL),
-			FileName_.get(),
-			RT_RCDATA
+			resInfo
 		)
 	);
 }
 
-GLuint ShaderManagement::LoadVertexShader(std::string VertexFilePath) {
+GLuint ShaderManagement::LoadVertexShader(std::string VertexFileName) {
 	//バーテックスシェーダファイルの読み込み
 	std::string VertexShaderCode;
-	if (VertexFilePath != "") {
-		std::ifstream VertexShaderStream(VertexFilePath, std::ios::in);
-		//シェーダファイルが存在するかどうか
-		if (VertexShaderStream.is_open()) {
-			//ソースコード文字列取得
-			std::string Line = "";
-			while (getline(VertexShaderStream, Line))
-				VertexShaderCode += "\n" + Line;
-			VertexShaderStream.close();
-		}
-		else {
+	if (VertexFileName != "") {
+		VertexShaderCode = GetResource(VertexFileName);
+		std::cout << VertexShaderCode << std::endl;
+		if(VertexShaderCode == "") {
 			std::cout << "Vertex Shader is not found." << std::endl;
 			return NormalVertexShaderID;
 		}
@@ -54,19 +57,13 @@ GLuint ShaderManagement::LoadVertexShader(std::string VertexFilePath) {
 	return VertexShaderID;
 }
 
-GLuint ShaderManagement::LoadFragmentShader(std::string FragmentFilePath) {
+GLuint ShaderManagement::LoadFragmentShader(std::string FragmentFileName) {
 	//フラグメントシェーダファイルの読み込み
 	std::string FragmentShaderCode;
-	if (FragmentFilePath != "") {
-		std::ifstream FragmentShaderStream(FragmentFilePath, std::ios::in);
-		if (FragmentShaderStream.is_open()) {
-			//ソースコード文字列取得
-			std::string Line = "";
-			while (getline(FragmentShaderStream, Line))
-				FragmentShaderCode += "\n" + Line;
-			FragmentShaderStream.close();
-		}
-		else {
+	std::cout << FragmentShaderCode << std::endl;
+	if (FragmentFileName != "") {
+		FragmentShaderCode = GetResource(FragmentFileName);
+		if (FragmentShaderCode == "") {
 			std::cout << "Fragment Shader is not found." << std::endl;
 			return NormalFragmentShaderID;
 		}
@@ -106,11 +103,11 @@ ShaderManagement::~ShaderManagement() {
 	glDeleteShader(NormalFragmentShaderID);
 }
 
-GLuint ShaderManagement::Load(std::string VertexFilePath, std::string FragmentFilePath) {
+GLuint ShaderManagement::Load(std::string VertexFileName, std::string FragmentFileName) {
 	//バーテックスシェーダ読み込み
-	GLuint VertexShaderID = LoadVertexShader(VertexFilePath);
+	GLuint VertexShaderID = LoadVertexShader(VertexFileName);
 	//フラグメントシェーダ読み込み
-	GLuint FragmentShaderID = LoadFragmentShader(FragmentFilePath);
+	GLuint FragmentShaderID = LoadFragmentShader(FragmentFileName);
 
 	//シェーダのリンク
 	GLuint ProgramID = glCreateProgram();

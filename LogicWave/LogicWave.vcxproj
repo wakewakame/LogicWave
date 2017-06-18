@@ -142,11 +142,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="src\lib\UI\Shader\default.fs" />
-    <Resource Include="src\lib\UI\Shader\default.vs">
-      <FileType>Document</FileType>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
-    </Resource>
+    <None Include="src\lib\UI\Shader\default.vs" />
+    <None Include="vartex1.bin" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\UI\Animation.cpp" />
@@ -164,6 +161,8 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="src\lib\SM\ShareMemory.h" />
     <ClInclude Include="src\lib\UI\Animation.h" />
     <ClInclude Include="src\lib\UI\define.h" />
@@ -179,6 +178,12 @@
     <ClInclude Include="src\lib\UI\win_info.h" />
     <ClInclude Include="src\lib\VST\define.h" />
     <ClInclude Include="src\lib\VST\VST.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\lib\UI\Shader\default.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,7 @@
 #include "define.h"
 #include "win_info.h"
 #include "FBO.h"
+#include "ShaderManagement.h"
 #include "Frame.h"
 #include "UI.h"
 
@@ -24,6 +25,8 @@ public:
 	WINDOW_INFO win;
 	//rootフレーム生成
 	Frame window;
+	//シェーダ管理クラスインスタンス化
+	ShaderManagement Shader;
 
 //関数宣言
 	//初期化関数
