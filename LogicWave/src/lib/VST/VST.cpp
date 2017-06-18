@@ -19,7 +19,7 @@ bool AllProcess::start(LPSTR MapName) {
 	}
 	else {
 		sm.smd->Ready = frames.ui.win.hwnd;
-		frames.ui.win.hide = 1;
+		frames.ui.win.close = 0;
 	}
 	//フレームレート設定
 	frames.ui.win.fps.SetFPS(30);
@@ -28,8 +28,17 @@ bool AllProcess::start(LPSTR MapName) {
 	//メインルーチン
 	while (true) {
 		//UIループ処理とホスト生存確認
-		if (frames.ui.loop() || sm.smd->exit) {
+		if (frames.ui.loop() || sm.smd->message == 1) {
 			break;
+		}
+		//クローズボタンが押されたとき
+		if (frames.ui.win.close_flag) {
+
+			frames.ui.win.close_flag = 0;
+		}
+		//アクティブ化
+		if (sm.smd->message == 2) {
+			SetActiveWindow(frames.ui.win.hwnd);
 		}
 	}
 	//終了時処理

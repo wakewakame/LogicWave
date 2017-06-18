@@ -142,6 +142,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="src\lib\UI\Shader\default.fs" />
+    <Resource Include="src\lib\UI\Shader\default.vs">
+      <FileType>Document</FileType>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\UI\Animation.cpp" />
@@ -151,6 +156,7 @@
     <ClCompile Include="src\lib\UI\get_event.cpp" />
     <ClCompile Include="src\lib\UI\GraphPara.cpp" />
     <ClCompile Include="src\lib\UI\mouse.cpp" />
+    <ClCompile Include="src\lib\UI\ShaderManagement.cpp" />
     <ClCompile Include="src\lib\UI\UI.cpp" />
     <ClCompile Include="src\lib\UI\UILib.cpp" />
     <ClCompile Include="src\lib\UI\win_info.cpp" />
@@ -167,6 +173,7 @@
     <ClInclude Include="src\lib\UI\get_event.h" />
     <ClInclude Include="src\lib\UI\GraphPara.h" />
     <ClInclude Include="src\lib\UI\mouse.h" />
+    <ClInclude Include="src\lib\UI\ShaderManagement.h" />
     <ClInclude Include="src\lib\UI\UI.h" />
     <ClInclude Include="src\lib\UI\UILib.h" />
     <ClInclude Include="src\lib\UI\win_info.h" />

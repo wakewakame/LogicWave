@@ -133,5 +133,5 @@ struct ShareMemData {
 	HWND Ready; //GUIクライアントが起動直後に自ウィンドウハンドル代入(多重起動回避のため)
 	HWND Host; //ホストが生成したウィンドウのハンドル
 	ToneData para; //VSTのパラメーター群
-	bool exit; //終了フラグ
+	char message; //メッセージ(0:無し,1:終了,2:アクティブ化)
 };
