@@ -25,8 +25,6 @@ public:
 //変数宣言
 	//ウィンドウ情報保持変数初期化
 	WINDOW_INFO win;
-	//シェーダ管理クラスインスタンス化
-	ShaderManagement *Shader;
 	//rootフレーム生成
 	Frame window;
 
