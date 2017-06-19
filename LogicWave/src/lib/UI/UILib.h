@@ -1,9 +1,11 @@
 ﻿#pragma once
 
+#include <memory>
+
 #include "define.h"
 #include "win_info.h"
-#include "FBO.h"
 #include "ShaderManagement.h"
+#include "FBO.h"
 #include "Frame.h"
 #include "UI.h"
 
@@ -23,10 +25,10 @@ public:
 //変数宣言
 	//ウィンドウ情報保持変数初期化
 	WINDOW_INFO win;
+	//シェーダ管理クラスインスタンス化
+	ShaderManagement *Shader;
 	//rootフレーム生成
 	Frame window;
-	//シェーダ管理クラスインスタンス化
-	ShaderManagement Shader;
 
 //関数宣言
 	//初期化関数

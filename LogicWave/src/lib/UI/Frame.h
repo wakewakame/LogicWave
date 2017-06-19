@@ -2,6 +2,7 @@
 
 #include "define.h"
 #include "win_info.h"
+#include "ShaderManagement.h"
 
 //フレーム基底クラス
 class Frame {
@@ -40,6 +41,7 @@ public:
 	bool lock; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
 	WindowPoint lock_length; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	WINDOW_INFO *win;
+	ShaderManagement *Shader;
 
 	//関数宣言
 	//WINDOW_INFOポインタ代入

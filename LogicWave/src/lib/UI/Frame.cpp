@@ -52,6 +52,8 @@ void Frame::when_create() {
 		parent->childs.push_back(this);
 		//WINDOW_INFOを親フレームと同一のものにする
 		win = parent->win;
+		//ShaderManagementを親フレームと同一のものにする
+		Shader = parent->Shader;
 	}
 	//自フレームのインデックス番号取得
 	get_index();

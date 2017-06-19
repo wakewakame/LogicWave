@@ -78,6 +78,9 @@ void UILib::init() {
 
 	//windowƒtƒŒ[ƒ€‰Šú‰»
 	window.win = &win;
+	std::unique_ptr<ShaderManagement> _Shader{ new ShaderManagement };
+	Shader = _Shader.get();
+	window.Shader = Shader;
 	window_resize(1);
 
 	return;
