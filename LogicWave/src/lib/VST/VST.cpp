@@ -36,6 +36,10 @@ bool AllProcess::start(LPSTR MapName) {
 
 			frames.ui.win.close_flag = 0;
 		}
+		///
+		sm.smd->para.pitch = (float)frames.ui.window.win->mouse.mouse.x;
+		if (!frames.ui.window.win->mouse.push.l) sm.smd->para.pitch = 0.0f;
+		///
 		//アクティブ化
 		if (sm.smd->message == 2) {
 			SetActiveWindow(frames.ui.win.hwnd);

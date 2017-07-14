@@ -24,8 +24,10 @@ public:
 	}
 	//共有メモリアクセス関数
 	bool Open(LPSTR set_MapName) {
+		std::cout << "MapName:" << set_MapName << std::endl;
 		//文字列が存在しているか確認
 		if (set_MapName == nullptr) { //引数がなければエラー
+			std::cout << "MapName is not found" << std::endl;
 			return 1;
 		}
 		std::cout << "MapName is exist" << std::endl;
@@ -35,6 +37,7 @@ public:
 		//共有メモリの検索
 		MapHandle = OpenFileMapping(FILE_MAP_ALL_ACCESS, FALSE, (LPCTSTR)MapName); //ファイル名からマップハンドル取得
 		if (MapHandle == NULL) { //マップが存在していなければエラー
+			std::cout << "Map is not found" << std::endl;
 			return 1;
 		}
 		//newした変数を解放
@@ -42,6 +45,7 @@ public:
 		std::cout << "Map is exist" << std::endl;
 		//共有メモリのポインタ取得
 		smd = (ShareMemData *)MapViewOfFile(MapHandle, FILE_MAP_ALL_ACCESS, 0, 0, ShareMemSize); //マップ内容同期
+		std::cout << "To access Map is failed" << std::endl;
 		if (smd == NULL) { //マップ内容取得ができていなければエラー
 			return 1;
 		}
