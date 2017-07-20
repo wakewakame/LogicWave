@@ -28,8 +28,8 @@ VSTiがホストプロセスで、このプログラムとはメモリ共有で�
 2017/02/06:  
 FBOクラス追加して、アニメーションクラスちょっと改造した  
 ボタンでFBOテスト  
-![グラフ](https://raw.githubusercontent.com/wakewakame/VSTOF/master/Demo/fbo.gif)
-
-2017/05あたり/xx(日付忘れた)
-Visual StudioをアップグレードしたらopenFrameworksが使用できなくなったためOpenGLに移植
-UI用の小さいライブラリのようなもの作成中
+![グラフ](https://raw.githubusercontent.com/wakewakame/VSTOF/master/Demo/fbo.gif)  
+  
+2017/05あたり/xx(日付忘れた):  
+Visual StudioをアップグレードしたらopenFrameworksが使用できなくなったためOpenGLに移植  
+UI用の小さいライブラリのようなもの作成中  
